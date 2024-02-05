@@ -17,3 +17,8 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/mysql
+/docker/centos/logs/access_log
+/docker/centos/logs/error_log
+/docker/apache/logs/access.log
+/docker/apache/logs/error.log

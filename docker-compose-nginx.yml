@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+    web:
+        build: ./docker/php-fpm
+        container_name: web
+        volumes:
+            - .:/usr/share/nginx/html
+        depends_on:
+            - mysql
+        ports:
+            - 5173:5173
+    nginx:
+        build: ./docker/nginx
+        container_name: nginx
+        ports:
+            - "8000:80"
+        volumes:
+            - .:/usr/share/nginx/html
+        depends_on:
+            - web
+    mysql :
+        image: mysql
+        container_name: mysql
+        ports:
+          - "3306:3306"
+        volumes:
+            - ./mysql:/var/lib/mysql
+        environment:
+            - MYSQL_ALLOW_EMPTY_PASSWORD=true
+            - MYSQL_DATABASE=${DB_DATABASE}
+            - MYSQL_USER=${DB_USERNAME}
+            - MYSQL_PASSWORD=${DB_PASSWORD}
